@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+    <!-- semantic ui css-->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css">
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- jquery datatables -->
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+    <!-- semantic ui js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.js"></script>
+    <!-- plotly js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <!-- d3 js -->
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+
+    <style>
+        /* General div style*/
+        .centered {
+            margin: auto;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+        }
+
+        /* D3 graph styling */
+        .link {
+            stroke: #666;
+        }
+
+        .node text {
+            pointer-events: none;
+        }
+
+
+        /* Dark mode additions*/
+        body.inverted {
+            background-color: #232B32;
+        }
+
+        .ui.tabular.menu .item:hover {
+            color: #888;
+        }
+
+        .ui.tabular.menu.inverted {
+            background: transparent;
+            border-bottom: 1px solid #555 !important;
+        }
+
+        .ui.inverted.menu .active.item {
+            background: #1b1c1d !important;
+            border-color: #555 !important;
+        }
+
+        select {
+            color: white;
+        }
+
+        input {
+            color: white;
+        }
+
+        table.dataTable.stripe > tbody > tr.odd > *, table.dataTable.display > tbody > tr.odd > * {
+            box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.023);
+        }
+
+        table.dataTable.display > tbody > tr.odd > .sorting_1, table.dataTable.order-column.stripe > tbody > tr.odd > .sorting_1 {
+            box-shadow: inset 0 0 0 9999px rgba(255, 255, 255, 0.01);
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Styling for plotly charts, for use in plugins
+        const plotly_style = {
+            plot_bgcolor: 'transparent',
+            paper_bgcolor: 'transparent',
+            font: {
+                'color': 'white'
+            }
+        };
+
+        function resize_all() {
+            window.dispatchEvent(new Event('resize'));
+        }
+
+        // Utility function to resize plotly charts, for use in plugins
+        function resize_plotly_chart(div_name) {
+            const div = document.getElementById(div_name);
+            if (div.data)
+            {
+                Plotly.relayout(
+                    div_name,
+                    {
+                        'width': div.offsetWidth,
+                        'height': div.offsetHeight});
+            }
+        }
+
+        $(document).ready(function () {
+            // activate tabs and trigger a resize event on visibility change
+            $('.menu .item').tab({'onVisible': resize_all});
+
+            // make evertyhing from semantic UI dark mode
+            $('body').find('.ui').addClass('inverted');
+            $('body').addClass('inverted');
+        });
+    </script>
+
+    <div class="centered">
+        <h1 class="ui header">Results</h1>
+
+        <div class="container centered">
+            <!-- Tab headers -->
+            <div class="ui top attached tabular menu">
+                {{ tab headers }}
+            </div>
+
+            <!-- tabs for each plugin's data -->
+            {{ tabs }}
+        </div>
+
+    </div>
+</body>

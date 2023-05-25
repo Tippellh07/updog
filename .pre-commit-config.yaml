@@ -1,0 +1,146 @@
+default_language_version:
+  python: python3
+repos:
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v3.3.1
+  hooks:
+  - id: pyupgrade
+    name: (Python) Check for updated syntax with pyupgrade
+    args: [--py310-plus]
+
+- repo: https://github.com/asottile/add-trailing-comma
+  rev: v2.4.0
+  hooks:
+  - id: add-trailing-comma
+    name: (Python) Add trailing commas
+    args: [--py36-plus]
+
+- repo: https://github.com/pycqa/isort
+  rev: 5.12.0
+  hooks:
+  - id: isort
+    name: (Python) Sort imports with isort
+
+- repo: https://github.com/psf/black
+  rev: 23.1.0
+  hooks:
+  - id: black
+    name: (Python) Format code using black
+
+- repo: https://github.com/asottile/blacken-docs
+  rev: 1.13.0
+  hooks:
+  - id: blacken-docs
+    name: (Python) Format docstrings using black
+    additional_dependencies:
+    - black==22.3.0
+
+- repo: https://github.com/pycqa/bandit
+  rev: 1.7.4
+  hooks:
+  - id: bandit
+    name: (Python) Lint using bandit
+    exclude: "src/tests/"
+
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
+  hooks:
+  - id: flake8
+    name: (Python) Lint using flake8
+    additional_dependencies:
+    - flake8-2020
+    - flake8-black
+    - flake8-bugbear
+    - flake8-builtins
+    - flake8-comprehensions
+    - flake8-implicit-str-concat
+    - flake8-logging-format
+    - flake8-simplify
+    - flake8-todos
+    - flake8-typing-imports
+    - flake8-use-fstring
+    - pep8-naming
+
+- repo: https://github.com/charliermarsh/ruff-pre-commit
+  rev: 'v0.0.246'
+  hooks:
+  - id: ruff
+    args: [--fix, --exit-non-zero-on-fix]
+
+- repo: https://github.com/pre-commit/mirrors-mypy
+  rev: v1.0.0
+  hooks:
+  - id: mypy
+    name: (Python) Lint using mypy
+    args: [--no-strict-optional, --ignore-missing-imports]
+    exclude: "src/tests/"
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+  - id: check-added-large-files
+    name: Check for large added files
+    args: [--maxkb, "500"]
+  - id: check-ast
+    name: (Python) Check for syntax errors
+  - id: check-builtin-literals
+    name: (Python) Check for builtin type constructor use
+  - id: check-case-conflict
+    name: Check for file system case conflicts
+  - id: check-docstring-first
+    name: (Python) Check that docstrings are first
+  - id: check-executables-have-shebangs
+    name: Check for executables missing shebangs
+  - id: check-json
+    name: Check JSON validates
+  - id: check-merge-conflict
+    name: Check for merge conflicts
+  - id: check-shebang-scripts-are-executable
+    name: Check for non-executable scripts with shebangs
+  - id: check-symlinks
+    name: Check for broken symlinks
+  - id: check-toml
+    name: Check TOML validates
+  - id: check-vcs-permalinks
+    name: Check for GitHub permalinks
+  - id: check-xml
+    name: Check XML validates
+  - id: check-yaml
+    name: Check YAML validates
+  - id: debug-statements
+    name: (Python) Check for debug statements
+  - id: destroyed-symlinks
+    name: Check for destroyed symlinks
+  - id: end-of-file-fixer
+    name: Check for missing newline at the end of files
+  - id: fix-byte-order-marker
+    name: Check for UTF-8 byte order marker
+  - id: mixed-line-ending
+    name: Check for mixed line endings
+  - id: name-tests-test
+    name: (Python) Check that test files end in _test.py
+  - id: pretty-format-json
+    name: Pretty format JSON
+    args: [--autofix, --indent, "2"]
+  - id: requirements-txt-fixer
+    name: (Python) Check for canonical requirements.txt
+  - id: trailing-whitespace
+    name: Check for trailing whitespace
+    exclude: \.md$
+
+- repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
+  rev: v2.6.0
+  hooks:
+  - id: pretty-format-toml
+    name: Pretty format TOML
+    args: [--autofix]
+  - id: pretty-format-yaml
+    name: Pretty format YAML
+    args: [--autofix, --indent, "2", --preserve-quotes]
+
+- repo: https://github.com/editorconfig-checker/editorconfig-checker.python
+  rev: 2.7.1
+  hooks:
+  - id: editorconfig-checker
+    alias: ec
