@@ -44,7 +44,7 @@ class DNSPlugin(BasePlugin):
 
     DNS_FIELDS = ["qry_name", "qry_type", "a", "aaaa", "cname", "resp_name"]
     DNS_IP_FIELDS = ["a", "aaaa"]
-    QRY_TYPE_MAP = {1: "A", 5: "CNAME", 28: "AAAA"}
+    QRY_TYPE_MAP = {1: "A", 5: "CNAME", 28: "AAAA", -1: "Error"}
 
     def __init__(self) -> None:
         """Initialise the plugin data."""
@@ -66,7 +66,7 @@ class DNSPlugin(BasePlugin):
         }
         for field in self.DNS_FIELDS:
             if field == "qry_type":
-                qry_type = int(getattr(packet.dns, field, None))
+                qry_type = int(getattr(packet.dns, field, -1))
                 entry[field] = str(qry_type)
                 if qry_type in self.QRY_TYPE_MAP:
                     entry[field] += f" ({self.QRY_TYPE_MAP[qry_type]})"
