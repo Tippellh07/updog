@@ -36,3 +36,17 @@ https://wiki.wireshark.org/SampleCaptures.
 #### HTTP table
 
 ![HTTP table](./images/http_cap_http.png)
+
+### ultimate_wireshark_protocols_pcap_220213.pcap
+
+Example output generated using a subset of the
+ultimate_wireshark_protocols_pcap_220213.pcap example pcap from
+https://wiki.wireshark.org/SampleCaptures.
+
+#### Protocols graph
+
+![Protocols graph](./images/ultimate_pcap_protocols.png)
+
+#### DNS table
+
+![DNS table](./images/ultimate_pcap_dns.png)
