@@ -19,6 +19,7 @@ from updog.plugins.HTTP import HTTPPlugin
 from updog.plugins.Layer3Protocols import Layer3ProtocolPlugin
 from updog.plugins.Protocols import ProtocolPlugin
 from updog.plugins.Summary import SummaryPlugin
+from updog.plugins.Traffic import TrafficPlugin
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,7 @@ PLUGINS: list[typing.Callable[[], BasePlugin]] = [
     SummaryPlugin,
     ProtocolPlugin,
     ConnectionPlugin,
+    TrafficPlugin,
     Layer3ProtocolPlugin,
     DNSPlugin,
     HTTPPlugin,
