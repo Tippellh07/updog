@@ -104,9 +104,15 @@ class TrafficPlugin(BasePlugin):
         """Visualise the DNS packets in a table."""
         up_data = {}
         down_data = {}
-        for key, value in analysis_data.items():
-            up_data[key.replace(": ", "<br>")] = value["up"]
-            down_data[key.replace(": ", "<br>")] = value["down"]
+        sorted_keys = sorted(
+            analysis_data,
+            key=lambda x: analysis_data[x]["up"] + analysis_data[x]["down"],
+            reverse=True,
+        )
+
+        for key in sorted_keys:
+            up_data[key.replace(": ", "<br>")] = analysis_data[key]["up"]
+            down_data[key.replace(": ", "<br>")] = analysis_data[key]["down"]
 
         return HTML_TEMPLATE.replace("{{ up_data_raw }}", json.dumps(up_data)).replace(
             "{{ down_data_raw }}",
