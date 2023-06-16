@@ -11,7 +11,7 @@ from updog.plugin_base import BasePlugin
 
 HTML_TEMPLATE = """
     <script>
-        function make_bar_chart(div)
+        function make_traffic_bar_chart(div)
         {
             const up_data_raw = {{ up_data_raw }};
             const up_data = {
@@ -28,20 +28,33 @@ HTML_TEMPLATE = """
                 'type': 'bar'
             };
 
+            const layout = {
+                ...plotly_style,
+                'width': up_data.x.length * 50,  // fixed width bars
+                'showlegend': false,
+                'xaxis': {
+                    'showticklabels': false
+                },
+                'yaxis': {
+                    'title': {
+                        'text': 'Bytes sent'
+                    }
+                }
+            }
+
             Plotly.newPlot(
                 div,
                 [up_data, down_data],
-                plotly_style);
+                layout);
         }
 
         $(document).ready(function () {
-            // Resize chart when necessary
-            addEventListener("resize", () => { resize_plotly_chart('traffic_chart') });
+            // Don't resize chart as we want to maintain a minimum bar width
 
-            make_bar_chart('traffic_chart');
+            make_traffic_bar_chart('traffic_chart');
         });
     </script>
-    <div id="traffic_chart">
+    <div id="traffic_chart" style="overflow:auto;">
     </div>
 """
 
@@ -92,8 +105,8 @@ class TrafficPlugin(BasePlugin):
         up_data = {}
         down_data = {}
         for key, value in analysis_data.items():
-            up_data[key] = value["up"]
-            down_data[key] = value["down"]
+            up_data[key.replace(": ", "<br>")] = value["up"]
+            down_data[key.replace(": ", "<br>")] = value["down"]
 
         return HTML_TEMPLATE.replace("{{ up_data_raw }}", json.dumps(up_data)).replace(
             "{{ down_data_raw }}",

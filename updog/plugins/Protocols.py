@@ -11,7 +11,7 @@ from updog.plugin_base import BasePlugin
 
 HTML_TEMPLATE = """
     <script>
-        function make_bar_chart(div)
+        function make_protocols_bar_chart(div)
         {
             const data = {{ data }};
 
@@ -29,7 +29,7 @@ HTML_TEMPLATE = """
             // Resize chart when necessary
             addEventListener("resize", () => { resize_plotly_chart('protocol_chart') });
 
-            make_bar_chart('protocol_chart');
+            make_protocols_bar_chart('protocol_chart');
         });
     </script>
     <div id="protocol_chart">
