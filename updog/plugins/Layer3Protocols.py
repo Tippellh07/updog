@@ -11,28 +11,24 @@ from updog.plugin_base import BasePlugin
 
 HTML_TEMPLATE = """
     <script>
-        function make_pie_chart(div)
-        {
+        $(document).ready(function () {
+            // Draw chart
             const data = {{ data }};
 
             Plotly.newPlot(
-                div,
+                'l3_protocol_chart',
                 [{
                     'labels': Object.keys(data),
                     'values': Object.values(data),
                     'type': 'pie'
                 }],
                 plotly_style);
-        }
 
-        $(document).ready(function () {
             // Resize chart when necessary
             addEventListener(
                 "resize",
                 () => { resize_plotly_chart('l3_protocol_chart') }
             );
-
-            make_pie_chart('l3_protocol_chart');
         });
     </script>
     <div id="l3_protocol_chart" class="centered">

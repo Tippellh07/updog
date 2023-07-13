@@ -11,25 +11,21 @@ from updog.plugin_base import BasePlugin
 
 HTML_TEMPLATE = """
     <script>
-        function make_bar_chart(div)
-        {
+        $(document).ready(function () {
+            // Draw chart
             const data = {{ data }};
 
             Plotly.newPlot(
-                div,
+                'protocol_chart',
                 [{
                     'x': Object.keys(data),
                     'y': Object.values(data),
                     'type': 'bar'
                 }],
                 plotly_style);
-        }
 
-        $(document).ready(function () {
             // Resize chart when necessary
             addEventListener("resize", () => { resize_plotly_chart('protocol_chart') });
-
-            make_bar_chart('protocol_chart');
         });
     </script>
     <div id="protocol_chart">
