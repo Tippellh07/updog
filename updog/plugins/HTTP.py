@@ -12,31 +12,27 @@ from updog.plugin_base import BasePlugin
 
 HTML_TEMPLATE = """
     <script>
-        function make_http_pie_chart(div)
-        {
+        $(document).ready(function () {
+            $('#HTTP_request_table').DataTable();
+            $('#HTTP_request_by_path_table').DataTable();
+
+            // Draw chart
             const data = {{ method_data }};
 
             Plotly.newPlot(
-                div,
+                'http-method-chart',
                 [{
                     'labels': Object.keys(data),
                     'values': Object.values(data),
                     'type': 'pie'
                 }],
                 plotly_style);
-        }
-
-        $(document).ready(function () {
-            $('#HTTP_request_table').DataTable();
-            $('#HTTP_request_by_path_table').DataTable();
 
             // Resize chart when necessary
             addEventListener(
                 "resize",
                 () => { resize_plotly_chart('http-method-chart') }
             );
-
-            make_http_pie_chart('http-method-chart');
         });
     </script>
     <div class="container centered">

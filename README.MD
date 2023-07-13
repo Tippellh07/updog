@@ -5,7 +5,7 @@ Understanding PCAPs with Data Or Graphs
 UPDOG is a tool for getting a high level overview of a PCAP, to draw attention
 to potential areas of interest.
 
-## What's UPDOG
+## What's UPDOG?
 
 Not much, how about you?
 
