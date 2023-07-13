@@ -19,6 +19,15 @@ sudo apt install tshark
 pre-commit install
 ```
 
+## Usage
+
+To generate JSON and html views of the pcap `my_pcap.pcapng`, simply run the
+following command.
+
+```sh
+python3 updog_cli.py -i my_pcap.pcapng -o output.json --output-html output.html
+```
+
 ## Example output
 
 ### HTTP.cap
@@ -50,3 +59,14 @@ https://wiki.wireshark.org/SampleCaptures.
 #### DNS table
 
 ![DNS table](./images/ultimate_pcap_dns.png)
+
+## Use cases
+
+As it says above, the main goal of UPDOG is to be able to generate a high level
+overview of a PCAP, to draw attention to potential areas of interest. This can
+be useful for a variety of reasons, some of these are outlined below:
+
+-  Looking for patterns in your home network traffic.
+-  Looking at network traffic when performing software reverse engineering.
+-  Looking for potential attack surface when performing vulnerability research.
+-  Looking for repeatedly used URLs in HTTP traffic.
